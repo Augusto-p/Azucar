@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* === Variables globales === */
+:root {
+--bg-color: #f4f4f4;
+--text-color: #000;
+--primary-color: #2196F3;
+--border-color: #E3F2FD;
+--border-hover: #90CAF9;
+--label-bg: #f4f4f4;
+--btn-text: #fff;
+--btn-cancel: #F44336;
+--btn-save: #4CAF50;
+}
+
+[data-theme="dark"] {
+--bg-color: #121212;
+--text-color: #fff;
+--primary-color: #90CAF9;
+--border-color: #333;
+--border-hover: #2196F3;
+--label-bg: #121212;
+--btn-text: #fff;
+--btn-cancel: #D32F2F;
+--btn-save: #388E3C;
+}
+
+/* === Body === */
+body {
+font-family: 'Roboto', sans-serif;
+background: var(--bg-color);
+color: var(--text-color);
+text-align: center;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+height: 30vh;
+}
+
+h1 {
+color: var(--primary-color);
+text-align: center;
+padding: 0;
+margin: 0;
+}
+
+/* === Botones Material === */
+.Material_Button {
+word-break: break-word;
+tab-size: 4;
+box-sizing: border-box;
+margin: 0;
+overflow: visible;
+text-transform: none;
+touch-action: manipulation;
+color: var(--btn-text);
+text-align: center;
+white-space: nowrap;
+cursor: pointer;
+font-weight: 600;
+font-size: 1.125em;
+line-height: 2.5 !important;
+vertical-align: middle;
+padding: 0 1em;
+letter-spacing: 1px;
+position: relative;
+backface-visibility: hidden;
+transform: translatey(0) scale3d(1, 1, 1);
+transition: all 100ms !important;
+border: var(--primary-color) solid 2px;
+display: flex;
+flex-direction: row;
+align-items: center;
+align-content: center;
+justify-content: center;
+border-radius: 16px !important;
+padding-left: 0.25em;
+min-width: 136px;
+user-select: none !important;
+}
+
+.Material_Button svg {
+fill: var(--btn-text);
+cursor: pointer;
+user-select: none !important;
+background-repeat: no-repeat;
+box-sizing: border-box;
+display: inline-block;
+position: absolute;
+width: 24px !important;
+line-height: 1 !important;
+left: 0.75em;
+}
+
+.Material_Button span {
+word-break: break-word;
+tab-size: 4;
+font-family: inherit;
+text-transform: none;
+color: var(--btn-text);
+white-space: nowrap;
+cursor: pointer;
+user-select: none !important;
+background-repeat: no-repeat;
+box-sizing: border-box;
+font-weight: bold;
+letter-spacing: 1px;
+text-align: center;
+padding-left: 2.25em;
+font-size: 18px !important;
+line-height: 2.5 !important;
+}
+
+/* Botones de acción */
+.Material_Button.cancelar {
+background: var(--btn-cancel);
+border-color: var(--btn-cancel);
+}
+
+.Material_Button.save {
+background: var(--btn-save);
+border-color: var(--btn-save);
+}
+
+.Buttons {
+display: flex;
+width: 90vw;
+justify-content: space-evenly;
+align-items: center;
+}
+
+/* === Inputs flotantes === */
+.form *,
+.form *::before,
+.form *::after {
+margin: 0;
+padding: 0;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+.form {
+position: relative;
+width: 90vw;
+height: 3rem;
+margin: 0;
+padding: 0;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+.form__input {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border: 2px solid var(--border-color);
+border-radius: 0.5rem;
+font-family: inherit;
+font-size: inherit;
+outline: none;
+padding: 1.25rem;
+background: none;
+color: var(--text-color);
+}
+
+.form__input:hover {
+border-color: var(--border-hover);
+}
+
+.form__input:focus {
+border-color: var(--primary-color);
+}
+
+.form__label {
+position: absolute;
+left: 1rem;
+top: 0.8rem;
+font-size: 1rem;
+padding: 0 0.5rem;
+cursor: text;
+transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+background-color: var(--label-bg);
+color: var(--text-color);
+}
+
+.form__input:focus~.form__label,
+.form__input:not(:placeholder-shown).form__input:not(:focus)~.form__label {
+top: -0.5rem;
+font-size: 0.8rem;
+left: 0.8rem;
+}
+
+.unit {
+position: absolute;
+right: 0rem;
+top: 0.8rem;
+padding: 0 0.5rem;
+cursor: text;
+color: var(--text-color);
+}
+
+  </style>
+</head>
+
+<body>
+  <h1>Actualizar Medicion</h1>
+  <!-- hora y fecha -->
+  <div class="form">
+    <input type="number" id="Valor" class="form__input" autocomplete="off" placeholder=""  min="0"/>
+    <label for="Valor" class="form__label"> Valor: </label>
+    <span class="unit">mg/dL</span>
+
+  </div> 
+
+  <!-- Formulario para añadir una nueva medición -->
+
+  <div class="Buttons">
+    <button class="Material_Button cancelar" id="cancel">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+        <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+      </svg>
+      <span>Cancelar</span>
+    </button>
+
+    <button class="Material_Button save" id="save">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+        <path
+          d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
+      </svg>
+      <span>Guardar</span>
+    </button>
+
+  </div>
+
+
+</body>
+<script>
+    let Id;
+    const cancel = document.getElementById("cancel");
+    const save = document.getElementById("save");
+    const valor = document.getElementById("Valor");
+
+    cancel.addEventListener("click", () => {
+     AndroidInterface.close();
+    });
+    save.addEventListener("click", () => {
+      AndroidInterface.save(Id,valor.value);
+    });
+    valor.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        AndroidInterface.save(Id,valor.value);
+      }
+    });
+
+   function loadData(jsonData) {
+        try {
+            const data = JSON.parse(jsonData);
+            valor.value = data.value;
+            Id = data.id;
+            valor.focus();
+        } catch (e) {
+            console.error("Error parsing JSON:", e);
+        }
+    }
+  function setTheme(theme){
+        document.body.setAttribute("data-theme", theme);
+    }
+</script>
+
+
+</html>

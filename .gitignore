@@ -1,0 +1,78 @@
+# =========================
+# ANDROID
+# =========================
+
+# Compiled files
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.o
+*.so
+
+# Generated folders
+bin/
+gen/
+out/
+build/
+app/build/
+
+# =========================
+# ANDROID STUDIO / INTELLIJ
+# =========================
+*.iml
+*.iws
+.idea/
+.gradle/
+.cxx/
+
+# VS Code
+.vscode/
+
+# =========================
+# GRADLE
+# =========================
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# =========================
+# SIGNING (NO SUBIR NUNCA)
+# =========================
+*.keystore
+*.jks
+*.pem
+
+# =========================
+# CONFIG LOCAL (NO SUBIR)
+# =========================
+local.properties
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+
+# API Keys
+apikeys.properties
+*.secret
+*.env
+*.key
+
+# =========================
+# LOGS
+# =========================
+*.log
+
+# =========================
+# SISTEMA / TEMP
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# NDK / CMake
+# =========================
+obj/
+*.a
+

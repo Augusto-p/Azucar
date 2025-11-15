@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Mi App</title>
+    <style>
+        :root {
+    --bg-color: #f4f4f4;
+    --text-color: #000000;
+    --primary-color: #2196F3;
+    --card-bg: #4CAF50cc;
+    --low-bg: #3F51B5cc;
+    --high-bg: #FF9800cc;
+    --veryhigh-bg: #F44336cc;
+    --btn-text: #ffffff;
+    --btn-delete: #F44336;
+    --btn-cancel: #4CAF50;
+    --menu-bg: #f4f4f4;
+    --overlay-bg: #000000cc;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --primary-color: #90CAF9;
+    --card-bg: #388E3Dcc;
+    --low-bg: #303F9Fcc;
+    --high-bg: #F57C00cc;
+    --veryhigh-bg: #D32F2Fcc;
+    --btn-text: #ffffff;
+    --btn-delete: #D32F2F;
+    --btn-cancel: #388E3C;
+    --menu-bg: #1e1e1e;
+    --overlay-bg: #000000cc; /* se mantiene igual */
+}
+
+/* === Body === */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* === Título === */
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* === Listado === */
+#listado {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 90vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* === Mediciones === */
+.medicion {
+    height: 10vh;
+    width: 95vw;
+    border-radius: 10px;
+    background: var(--card-bg);
+    margin-top: 5px;
+    display: grid;
+    align-items: center;
+    justify-content: start;
+    grid-template-columns: 8fr 2fr 5fr;
+    grid-template-rows: 6fr 4fr;
+}
+
+.medicion.Low {
+    background: var(--low-bg);
+}
+
+.medicion.High {
+    background: var(--high-bg);
+}
+
+.medicion.VeryHigh {
+    background: var(--veryhigh-bg);
+}
+
+.hour {
+    grid-row: 1;
+    font-size: 35px;
+    font-weight: bold;
+    grid-column: 1;
+    user-select: none;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 20px;
+    grid-row: 2;
+    grid-column: 1;
+    user-select: none;
+}
+
+.value {
+    grid-row: 1 / 3;
+    font-size: 30px;
+    font-weight: bold;
+    grid-column: 3;
+    user-select: none;
+    text-align: start;
+}
+
+.unit {
+    font-size: 18px;
+    justify-self: end;
+    user-select: none;
+}
+
+.icon {
+    grid-row: 1 / 3;
+    grid-column: 2;
+    height: 90%;
+    user-select: none;
+}
+
+/* === Botones Material === */
+.Material_Button {
+    word-break: break-word;
+    tab-size: 4;
+    box-sizing: border-box;
+    margin: 0;
+    text-transform: none;
+    touch-action: manipulation;
+    color: var(--btn-text);
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.125em;
+    line-height: 2.5 !important;
+    vertical-align: middle;
+    padding: 0 1em;
+    letter-spacing: 1px;
+    position: relative;
+    backface-visibility: hidden;
+    transform: translatey(0) scale3d(1, 1, 1);
+    transition: all 100ms !important;
+    border: var(--primary-color) solid 2px;
+    background-color: var(--primary-color);
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 10fr 35px auto 10fr;
+    align-items: center;
+    justify-items: start;
+    border-radius: 16px !important;
+    min-width: 136px;
+    user-select: none !important;
+}
+
+.Material_Button svg {
+    grid-column: 2;
+    fill: var(--btn-text);
+    width: 24px !important;
+}
+
+.Material_Button span {
+    grid-column: 3;
+    color: var(--btn-text);
+    font-weight: bold;
+    font-size: 18px !important;
+    text-align: left;
+}
+
+/* Botones específicos */
+.Material_Button.delete {
+    background: var(--btn-delete);
+    border-color: var(--btn-delete);
+}
+
+.Material_Button.cancelar {
+    background: var(--btn-cancel);
+    border-color: var(--btn-cancel);
+}
+
+/* === Menú flotante === */
+.MenuConteiner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    background-color: var(--menu-bg);
+    color: var(--text-color);
+    width: 90vw;
+    height: 25vh;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box;
+    justify-content: space-around;
+}
+
+.menuDelete {
+    height: 15vh;
+}
+
+.menuDelete .Buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.menuDelete > span {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+    </style>
+
+</head>
+
+<body>
+    <h1>Mediciones de Azúcar</h1>
+    <div id="listado">
+        
+    </div>
+</body>
+<script>
+    const listado = document.getElementById("listado");
+    const months = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+    let timer;
+    const LONG_PRESS_DURATION = 500; // milisegundos
+    function newMedicion(id, unixTime, value) {
+        const date = new Date(unixTime);
+        const hora = String(date.getHours()).padStart(2, '0');
+        const minuto = String(date.getMinutes()).padStart(2, '0');
+        let clase = "";
+        if (value < 70) {
+            clase = "Low";
+        } else if (value > 180) {
+            clase = "VeryHigh";
+        } else if (value > 100) {
+            clase = "High";
+        }
+        let item = document.createElement("div")
+        item.classList.add("medicion")
+        if (clase != "") {
+            item.classList.add(clase)
+        }
+        item.innerHTML = `
+            <span class="hour">${hora}:${minuto}</span>
+            <span class="date">${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}</span>
+            <span class="value">${value}<span class="unit">mg/dL</span></span>`
+           let svg = document.createElementNS("http://www.w3.org/2000/svg","svg")
+           svg.classList.add("icon")
+           svg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+           svg.setAttribute("viewBox", "0 0 420.000000 457.000")
+           svg.innerHTML = `<g transform="translate(0.000000,457.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                    <path d="M1898 4344 c-15 -8 -65 -65 -112 -127 -141 -189 -366 -509 -366 -521 0 -12 15 -37 57 -94 l25 -33 77 113 c88 129 308 432 359 496 l35 43 95 -128 c583 -788 997 -1489 1146 -1940 54 -162 68 -243 67 -373 -2 -342 -134 -654 -381 -900 -188 -188 -380 -296 -640 -360 -120 -30 -360 -38 -492 -16 -634 104 -1108 651 -1108 1278 0 123 17 220 64 361 l32 97 -40 0 c-23 0 -58 -3 -78 -6 -37 -6 -38 -8 -62 -83 -46 -145 -59 -229 -59 -366 1 -370 142 -717 401 -987 202 -210 433 -344 718 -415 102 -26 123 -27 334 -28 213 0 231 2 333 28 275 69 503 196 691 384 263 262 404 574 431 953 28 372 -206 917 -750 1755 -178 274 -530 768 -601 842 -38 41 -44 43 -95 43 -30 -1 -66 -7 -81 -16z"/>
+                    <path d="M950 3809 c-41 -4 -185 -17 -319 -29 -134 -11 -251 -25 -260 -29 -33 -18 -61 -59 -101 -146 -23 -50 -87 -186 -142 -303 -54 -117 -102 -228 -105 -245 -8 -49 12 -85 158 -292 73 -105 158 -226 189 -270 42 -61 66 -85 101 -103 l45 -22 180 15 c359 31 505 46 527 54 44 17 74 63 162 253 49 106 112 243 140 303 66 141 70 162 42 217 -13 23 -105 160 -205 303 -228 325 -215 315 -412 294z m288 -369 c83 -118 149 -217 146 -219 -2 -2 -126 -15 -276 -28 -216 -18 -274 -21 -279 -11 -4 7 -76 110 -159 228 l-151 215 68 8 c223 25 479 42 490 33 6 -6 79 -108 161 -226z m-661 -148 l142 -203 -33 -72 c-116 -253 -200 -427 -205 -427 -8 1 -305 429 -309 446 -3 12 33 92 175 393 l54 115 16 -25 c10 -13 81 -115 160 -227z m810 -254 c-23 -54 -210 -452 -217 -460 -3 -4 -107 -17 -230 -28 -124 -11 -246 -22 -272 -24 -27 -3 -48 -2 -48 2 0 4 51 118 114 252 90 192 118 246 134 248 51 8 423 40 475 41 l57 1 -13 -32z"/>
+                    <path d="M1635 2661 c-23 -11 -81 -61 -139 -122 -54 -57 -163 -169 -242 -250 -112 -115 -144 -152 -148 -180 -5 -24 6 -80 38 -194 160 -579 147 -542 198 -573 29 -17 232 -73 586 -160 165 -41 150 -49 432 240 129 132 243 256 254 276 12 24 17 48 13 72 -8 59 -177 663 -193 687 -8 13 -24 29 -37 37 -25 17 -675 186 -710 186 -7 0 -30 -9 -52 -19z m357 -202 l237 -62 -89 -96 c-49 -53 -135 -142 -193 -199 l-104 -104 -264 68 c-145 37 -266 69 -269 71 -2 2 83 92 190 199 182 182 197 195 225 190 17 -3 137 -33 267 -67z m419 -425 c38 -137 71 -255 74 -262 4 -12 -369 -402 -385 -402 -3 0 -39 120 -80 266 l-73 265 193 194 c107 107 196 193 198 191 2 -2 34 -116 73 -252z m-862 -109 c140 -36 256 -67 258 -69 2 -2 26 -84 54 -182 27 -99 61 -217 74 -264 13 -46 23 -85 22 -87 -3 -3 -420 104 -486 125 l-54 17 -68 245 c-38 135 -72 255 -75 268 -5 16 -3 21 7 17 8 -2 128 -34 268 -70z"/>
+                    <path d="M2843 1398 c-11 -13 -29 -39 -38 -58 -79 -157 -273 -334 -447 -406 -100 -43 -124 -89 -72 -141 33 -32 58 -28 179 32 182 90 343 242 454 425 43 71 51 120 22 149 -28 28 -72 27 -98 -1z"/>
+                </g>`
+            svg.addEventListener("click", ()=>{
+                viewMenu(item,id)
+            })
+            item.appendChild(svg)
+        listado.appendChild(item)
+
+    }
+
+    function receiveData(jsonData) {
+        try {
+            const data = JSON.parse(jsonData);
+            listado.innerHTML = "";
+            data.forEach(element => {
+                newMedicion(element.id, element.date, element.value);
+            });
+        } catch (e) {
+            console.error("Error parsing JSON:", e);
+        }
+    }
+    
+    let ConteinerMenu = document.createElement("div");
+    let body = document.getElementsByTagName("body")[0]
+    ConteinerMenu.classList.add("MenuConteiner");
+    ConteinerMenu.addEventListener("click", (e) => {
+        if (e.target.classList.contains("MenuConteiner")) {
+            body.removeChild(ConteinerMenu)
+        }
+    })
+    function viewMenu(element ,id) {
+        ConteinerMenu.innerHTML = ""
+        let menu = document.createElement("div")
+        menu.classList.add("menu")
+        let cancel = document.createElement("button")
+        cancel.classList.add("Material_Button", "cancelar")
+        cancel.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                            <span>Cancelar</span>`
+        cancel.addEventListener("click", ()=>{
+            body.removeChild(ConteinerMenu)
+        })
+
+        let edit = document.createElement("button")
+        edit.classList.add("Material_Button", "edit")
+        edit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                        </svg>
+                        <span>Editar</span>`
+        edit.addEventListener("click", ()=>{
+            AndroidInterface.edit(id);
+        })
+
+        let del = document.createElement("button")
+        del.classList.add("Material_Button", "delete")
+        del.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                        </svg>
+                        <span>Eliminar</span>`
+        del.addEventListener("click", ()=>{
+            viewDeleteMenu(element,id)
+        })         
+
+
+        menu.appendChild(edit)
+        menu.appendChild(del)
+        menu.appendChild(cancel)
+        ConteinerMenu.appendChild(menu)
+        body.appendChild(ConteinerMenu)
+    }
+
+    function viewDeleteMenu(element, id){
+        ConteinerMenu.innerHTML = ""
+        let menu = document.createElement("div")
+        menu.classList.add("menu","menuDelete")
+        menu.innerHTML = "<span>¿Estás seguro de querer eliminar este registro?</span>"
+        let cancel = document.createElement("button")
+        cancel.classList.add("Material_Button", "cancelar")
+        cancel.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                            <span>Cancelar</span>`
+        cancel.addEventListener("click", ()=>{
+            body.removeChild(ConteinerMenu)
+        })
+
+        let del = document.createElement("button")
+        del.classList.add("Material_Button", "delete")
+        del.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                        </svg>
+                        <span>Eliminar</span>`
+        del.addEventListener("click", () =>{
+            AndroidInterface.delete(id);
+            listado.removeChild(element)
+            body.removeChild(ConteinerMenu)
+        })         
+        let Buttons = document.createElement("div")
+        Buttons.classList.add("Buttons")
+        Buttons.appendChild(cancel)
+        Buttons.appendChild(del)
+        menu.appendChild(Buttons)
+        ConteinerMenu.appendChild(menu)
+        body.appendChild(ConteinerMenu)
+    }
+
+    function setTheme(theme){
+        document.body.setAttribute("data-theme", theme);
+    }
+
+</script>
+
+
+
+</html>
